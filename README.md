@@ -1,2 +1,2 @@
 # GUI
- GUI Project
+ GUI Project-Task and Productivity Management System
