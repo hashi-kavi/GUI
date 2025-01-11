@@ -1,0 +1,166 @@
+/* General Body Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #2c2c2c;
+    color: white;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Task Manager Container */
+  .task-manager {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Header Styles */
+  h1 {
+    text-align: center;
+    color: white;
+  }
+  
+  /* Task Input Styles */
+  .task-input {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-bottom: 1px solid #4e4e4e;
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .task-input input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: none;
+    outline: none;
+  }
+  
+  /* Button Styles */
+  .primaryBtn {
+    padding: 10px 15px;
+    font-size: 14px;
+    border: none;
+    color: white;
+    background-color: #00e67a;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .primaryBtn:hover {
+    background-color: #00c765;
+    transform: scale(1.05);
+  }
+  
+  /* Button Group Styles */
+  .btn-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  
+  .toggle-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    background-color: #474747;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .toggle-btn.active {
+    background-color: #00e67a;
+  }
+  
+  /* Task List Styles */
+  .task-list-item {
+    background: #414040;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .task-list-item h3 {
+    color: #00e67a;
+    margin: 0;
+  }
+  
+  /* Task Actions */
+  .task-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Icon Styles */
+  .icon {
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .complete-icon {
+    color: #00e67a;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .complete-icon:hover {
+    color: #00c765;
+    transform: scale(1.2);
+  }
+  
+  .delete-icon {
+    color: #e74c3c;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .delete-icon:hover {
+    color: red;
+    transform: scale(1.2);
+  }
+  /* Task input item styling */
+.task-input-item {
+    margin-bottom: 15px; /* Add space between input items */
+    display: flex;
+    flex-direction: column; /* Ensure label and input are stacked */
+  }
+  
+  .task-input-item label {
+    margin-bottom: 5px; /* Add spacing between the label and input */
+    font-weight: bold;
+    font-size: 14px;
+    color: white; /* Optional: Adjust label color */
+  }
+  
+  .task-input-item input {
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%; /* Ensure input box spans full width */
+    box-sizing: border-box; /* Include padding in width */
+  }
+  
+  .task-input-item input:focus {
+    border-color: #4CAF50; /* Highlight border on focus */
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+  

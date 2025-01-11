@@ -1,0 +1,117 @@
+/* HomePage.css - Dark Mode Theme */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Deep Black */
+  color: #E0E0E0; /* Light Gray */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: #1E1E1E; /* Dark Gray */
+  color: #FFFFFF; /* White */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.navbar .logo {
+  font-size: 24px;
+}
+
+.navbar nav ul {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar nav ul li a {
+  text-decoration: none;
+  color: #FFFFFF; /* White */
+  font-weight: bold;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  padding: 80px 20px;
+  background-color: #1E1E1E; /* Dark Gray */
+  color: #FFFFFF; /* White */
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.hero .primary-button,
+.hero .secondary-button {
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 8px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.primary-button {
+  background-color: #00FF7F; /* Electric Green */
+  color: #121212; /* Deep Black */
+}
+
+.primary-button:hover {
+  background-color: #18A0FB; /* Neon Blue */
+  color: #FFFFFF; /* White */
+}
+
+.secondary-button {
+  background-color: #555; /* Neutral Dark Gray */
+  color: #FFFFFF; /* White */
+}
+
+.secondary-button:hover {
+  background-color: #666; /* Lighter Neutral Gray */
+}
+
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background-color: #1E1E1E; /* Dark Gray */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Slightly stronger shadow for dark mode */
+  color: #E0E0E0; /* Light Gray */
+}
+
+.footer {
+  background-color: #1E1E1E; /* Dark Gray */
+  color: #FFFFFF; /* White */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .cta-button {
+    padding: 12px 30px;
+  }
+}

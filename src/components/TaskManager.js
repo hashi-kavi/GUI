@@ -1,60 +1,116 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import '../styles/TaskComponents.css';
+import { AiOutlineDelete } from "react-icons/ai";
 
-function TaskManager() {
-  const [tasks, setTasks] = useState([]);
-  const [task, setTask] = useState('');
+const TaskManager = () => {
+  const [allTasks, setAllTasks] = useState([]);
+  const [completedTasks, setCompletedTasks] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDescription, setNewDescription] = useState("");
+  const [isCompleteScreen, setIsCompleteScreen] = useState(false);
 
-  const addTask = () => {
-    if (task) {
-      setTasks([...tasks, { text: task, marked: false }]);
-      setTask('');
+  const handleAddTask = () => {
+    if (newTitle.trim() === "" || newDescription.trim() === "") {
+      alert("Please enter both title and description.");
+      return;
+    }
+    const newTask = { title: newTitle, description: newDescription, id: Date.now() };
+    setAllTasks([...allTasks, newTask]);
+    setNewTitle("");
+    setNewDescription("");
+  };
+
+  const handleCompleteTask = (taskId) => {
+    const taskToComplete = allTasks.find((task) => task.id === taskId);
+    if (taskToComplete) {
+      setAllTasks(allTasks.filter((task) => task.id !== taskId));
+      setCompletedTasks([...completedTasks, taskToComplete]);
     }
   };
 
-  const toggleMarkTask = (index) => {
-    const updatedTasks = tasks.map((t, i) =>
-      i === index ? { ...t, marked: !t.marked } : t
-    );
-    setTasks(updatedTasks);
+  const handleDeleteTask = (taskId, isCompleted) => {
+    if (isCompleted) {
+      setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
+    } else {
+      setAllTasks(allTasks.filter((task) => task.id !== taskId));
+    }
   };
 
-  const deleteTask = (index) => {
-    const filteredTasks = tasks.filter((_, i) => i !== index);
-    setTasks(filteredTasks);
-  };
+  const tasksToShow = isCompleteScreen ? completedTasks : allTasks;
 
   return (
-    <div>
-      <h2>Task Manager</h2>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter a task"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-        />
-        <button onClick={addTask}>Add Task</button>
+    <div className="task-manager">
+      <h1>MY TASKS</h1>
+      <div className="task-input">
+        <div className="task-input-item">
+          <label>Title</label>
+          <input
+            type="text"
+            value={newTitle}
+            onChange={(e) => setNewTitle(e.target.value)}
+            placeholder="Enter task title"
+          />
+        </div>
+        <div className="task-input-item">
+          <label>Description</label>
+          <input
+            type="text"
+            value={newDescription}
+            onChange={(e) => setNewDescription(e.target.value)}
+            placeholder="Enter task description"
+          />
+        </div>
+        <button onClick={handleAddTask} className="primaryBtn">
+          Add Task
+        </button>
       </div>
-      <ul>
-        {tasks.map((t, index) => (
-          <li
-            key={index}
-            style={{
-              textDecoration: t.marked ? 'line-through' : 'none',
-              backgroundColor: t.marked ? '#4caf50' : '#333',
-              color: t.marked ? 'white' : 'inherit',
-            }}
-          >
-            {t.text}
-            <button onClick={() => toggleMarkTask(index)}>
-              {t.marked ? 'Unmark' : 'Mark'}
-            </button>
-            <button onClick={() => deleteTask(index)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      <div className="btn-group">
+        <button
+          className={`toggle-btn ${!isCompleteScreen ? "active" : ""}`}
+          onClick={() => setIsCompleteScreen(false)}
+        >
+          Pending Tasks
+        </button>
+        <button
+          className={`toggle-btn ${isCompleteScreen ? "active" : ""}`}
+          onClick={() => setIsCompleteScreen(true)}
+        >
+          Completed Tasks
+        </button>
+      </div>
+      <div className="task-list">
+        {tasksToShow.length === 0 ? (
+          <p style={{ textAlign: "center", color: "gray" }}>
+            {isCompleteScreen ? "No completed tasks to show." : "No tasks to show."}
+          </p>
+        ) : (
+          tasksToShow.map((task) => (
+            <div key={task.id} className="task-list-item">
+              <div>
+                <h3>{task.title}</h3>
+                <p>{task.description}</p>
+              </div>
+              <div className="task-actions">
+                {!isCompleteScreen && (
+                  <span
+                    className="icon complete-icon"
+                    onClick={() => handleCompleteTask(task.id)}
+                  >
+                    ✅
+                  </span>
+                )}
+                <AiOutlineDelete
+                  className="icon delete-icon"
+                  onClick={() => handleDeleteTask(task.id, isCompleteScreen)}
+                  title="Delete"
+                />
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
-}
+};
 
 export default TaskManager;

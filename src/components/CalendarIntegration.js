@@ -1,28 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function CalendarIntegration() {
-  const [events, setEvents] = useState([]);
-
-  const addEvent = () => {
-    const eventName = prompt('Enter Event Name:');
-    const eventDate = prompt('Enter Event Date (YYYY-MM-DD):');
-    if (eventName && eventDate) {
-      setEvents([...events, { name: eventName, date: eventDate }]);
-    }
-  };
-
   return (
-    <div>
-      <h2>Calendar Integration</h2>
-      <button onClick={addEvent}>Add Event</button>
-      <ul>
-        {events.map((event, index) => (
-          <li key={index}>
-            {event.name} - {event.date}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="calendar-integration">
+      <h3>Calendar Integration (Coming Soon!)</h3>
+    </section>
   );
 }
 
