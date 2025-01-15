@@ -1,0 +1,93 @@
+/* Dark Mode Theme for Sign-Up Page */
+.authContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #2c3e50, #34495e); /* Darker gradient background */
+  }
+  
+  /* Card style for sign-up form */
+  .authCard {
+    background-color: #2c3e50; /* Dark background for the card */
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Slightly stronger shadow */
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    color: #ecf0f1; /* Light gray text for contrast */
+  }
+  
+  /* Heading style */
+  .heading {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #00E676; /* Electric green for heading to maintain a futuristic look */
+  }
+  
+  /* Input group container */
+  .inputGroup {
+    margin-bottom: 20px;
+  }
+  
+  /* Input field style */
+  .input {
+    width: 90%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #34495e; /* Dark border for inputs */
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #1e2a33; /* Dark background for input fields */
+    color: #ecf0f1; /* Light text inside inputs */
+    transition: all 0.3s ease;
+  }
+  
+  /* Focus effect for input fields */
+  .input:focus {
+    border-color: #00E676; /* Electric green focus border */
+    box-shadow: 0 0 5px rgba(0, 230, 118, 0.7); /* Green glow effect */
+  }
+  
+  /* Button style */
+  .authBtn {
+    width: 100%;
+    padding: 15px;
+    background-color: #00E676; /* Bright green button */
+    color: #121212; /* Dark text on button */
+    font-size: 1.2em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Button hover effect */
+  .authBtn:hover {
+    background-color: #1E88E5; /* Darker blue-green on hover */
+    transform: scale(1.05);
+  }
+  
+  /* Button active effect */
+  .authBtn:active {
+    transform: scale(1);
+  }
+  
+  /* Paragraph for login prompt */
+  .paragraph {
+    margin-top: 15px;
+    color: #ecf0f1; /* Light text for the paragraph */
+  }
+  
+  /* Link style */
+  .link {
+    text-decoration: none;
+    color: #00E676; /* Electric green link color */
+  }
+  
+  /* Hover effect for link */
+  .link:hover {
+    text-decoration: underline;
+  }
+  

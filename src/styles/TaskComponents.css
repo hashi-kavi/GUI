@@ -10,7 +10,7 @@ body {
   /* Task Manager Container */
   .task-manager {
     max-width: 800px;
-    margin: 20px auto;
+    margin: 140px auto;
     padding: 20px;
     background-color: #333;
     border-radius: 10px;

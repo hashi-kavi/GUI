@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './Navbar.css'; // Navbar-specific styles
+import './Navbar.css';
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,15 +12,24 @@ const Navbar = () => {
 
   return (
     <nav>
+      <div className='navbar-container'>  
+      <div className="logo">
+        <h2>TasksPro</h2>
+      </div>
       <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
         ☰
       </div>
       <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/taskmanager">Task Manager</Link></li>
+        <Link to="/calendar">Calendar</Link>
         <li><Link to="/about">About</Link></li>
         <li><Link to="/contact">Contact</Link></li>
+        
+
       </ul>
+      </div>
+      
       {isLandingPage && (
         <div className="auth-buttons">
           <Link to="/login" className="auth-button login-button">Login</Link>
