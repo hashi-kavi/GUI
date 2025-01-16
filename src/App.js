@@ -6,11 +6,7 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import Navbar from './components/Navbar';
-import CalendarIntegration from './components/CalendarIntegration';
-
-
-
-
+import CalendarPage from './pages/CalendarPage'; // Import CalendarPage
 
 const App = () => {
   return (
@@ -23,7 +19,7 @@ const App = () => {
             <Route path="/taskmanager" element={<TaskManager />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/calendar" element={<CalendarIntegration  />} />
+            <Route path="/calendar" element={<CalendarPage />} /> {/* Updated to CalendarPage */}
           </Routes>
         </main>
       </div>

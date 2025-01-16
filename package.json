@@ -7,6 +7,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "ajv": "^8.17.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "nth-check": "^2.1.1",
     "postcss": "^8.4.49",
     "react": "^18.2.0",
@@ -15,6 +17,7 @@
     "react-icons": "^5.4.0",
     "react-router-dom": "^6.28.1",
     "react-scripts": "^5.0.1",
+    "sqlite3": "^5.1.7",
     "web-vitals": "^4.2.4"
   },
   "scripts": {

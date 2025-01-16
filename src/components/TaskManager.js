@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../styles/TaskComponents.css';
 import { AiOutlineDelete } from 'react-icons/ai';
@@ -8,45 +8,99 @@ const TaskManager = () => {
   const [completedTasks, setCompletedTasks] = useState([]);
   const [newTitle, setNewTitle] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const [completionDate, setCompletionDate] = useState("");  // For storing due date
+  const [completionDate, setCompletionDate] = useState("");
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
 
-  const handleAddTask = () => {
-    if (newTitle.trim() === "" || newDescription.trim() === "") {
-      alert("Please enter both title and description.");
-      return;
-    }
-    if (!completionDate) {
-      alert("Please enter a completion date.");
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/tasks');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setAllTasks(data.filter((task) => task.status === 'pending'));
+        setCompletedTasks(data.filter((task) => task.status === 'completed'));
+        console.log('Fetched Tasks:', data); // Log fetched tasks
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    };
+    fetchTasks();
+  }, []);
+  
+  
+
+  const handleAddTask = async () => {
+    if (newTitle.trim() === "" || newDescription.trim() === "" || !completionDate) {
+      alert("Please fill in all fields.");
       return;
     }
 
     const newTask = {
       title: newTitle,
       description: newDescription,
-      dueDate: completionDate, // Store the due date
-      id: Date.now(),
+      completion_date: completionDate,
+      status: 'pending',
     };
 
-    setAllTasks([...allTasks, newTask]);
-    setNewTitle("");
-    setNewDescription("");
-    setCompletionDate("");  // Reset completion date after task is added
-  };
+    try {
+      const response = await fetch('http://localhost:5000/tasks', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newTask),
+      });
 
-  const handleCompleteTask = (taskId) => {
-    const taskToComplete = allTasks.find((task) => task.id === taskId);
-    if (taskToComplete) {
-      setAllTasks(allTasks.filter((task) => task.id !== taskId));
-      setCompletedTasks([...completedTasks, taskToComplete]);
+      if (!response.ok) {
+        throw new Error("Failed to add task");
+      }
+
+      const addedTask = await response.json();
+      setAllTasks([...allTasks, addedTask]);
+      setNewTitle("");
+      setNewDescription("");
+      setCompletionDate("");
+      console.log('Added Task:', addedTask); // Log added task
+    } catch (error) {
+      console.error("Error adding task:", error);
     }
   };
 
-  const handleDeleteTask = (taskId, isCompleted) => {
-    if (isCompleted) {
-      setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
-    } else {
+  const handleCompleteTask = async (taskId) => {
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        method: 'PUT',
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to complete task");
+      }
+
+      const completedTask = allTasks.find((task) => task.id === taskId);
+      setCompletedTasks([...completedTasks, { ...completedTask, status: 'completed' }]);
       setAllTasks(allTasks.filter((task) => task.id !== taskId));
+    } catch (error) {
+      console.error("Error completing task:", error);
+    }
+  };
+
+  const handleDeleteTask = async (taskId, isCompleted) => {
+    try {
+      const response = await fetch(`http://localhost:5000/tasks/${taskId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete task");
+      }
+
+      if (isCompleted) {
+        setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
+      } else {
+        setAllTasks(allTasks.filter((task) => task.id !== taskId));
+      }
+    } catch (error) {
+      console.error("Error deleting task:", error);
     }
   };
 
@@ -79,7 +133,7 @@ const TaskManager = () => {
           <input
             type="date"
             value={completionDate}
-            onChange={(e) => setCompletionDate(e.target.value)}  // Handling completion date
+            onChange={(e) => setCompletionDate(e.target.value)}
           />
         </div>
         <button onClick={handleAddTask} className="primaryBtn">
@@ -115,7 +169,7 @@ const TaskManager = () => {
               <div>
                 <h3>{task.title}</h3>
                 <p>{task.description}</p>
-                <p><strong>Due Date:</strong> {task.dueDate}</p> {/* Display due date */}
+                <p><strong>Completion Date:</strong> {task.completion_date}</p>
               </div>
               <div className="task-actions">
                 {!isCompleteScreen && (
@@ -136,10 +190,10 @@ const TaskManager = () => {
           ))
         )}
       </div>
-
-      {/* Add a link to navigate to the Calendar Page */}
-      <Link to={{ pathname: '/calendar', state: { tasks: allTasks } }}>Go to Calendar</Link>
-
+      
+      <Link to="/calendar">
+        <button className="primaryBtn">Go to Calendar</button>
+      </Link>
     </div>
   );
 };

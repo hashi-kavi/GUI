@@ -3,36 +3,48 @@
     flex-direction: column;
     align-items: center;
     margin: 20px;
-  }
-  
-  .highlight-date {
-    background-color: #f4a261 !important; /* Highlight color for dates with tasks */
+}
+
+.highlight-date {
+    background-color: #f4a261 !important;
     color: white !important;
     border-radius: 50%;
-  }
-  
-  .task-list {
+}
+
+.task-list {
     list-style: none;
     padding: 0;
-  }
-  
-  .task-list li {
+}
+
+.task-list li {
     margin: 5px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  
-  button {
+}
+
+button {
     margin-left: 10px;
     padding: 5px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  button:hover {
+}
+
+button:hover {
     background-color: #f4a261;
     color: white;
-  }
-  
+}
+
+/* Ensure only one definition for .highlight-date */
+.react-calendar__tile.highlight-date {
+    background-color: #4CAF50; /* Use your desired highlight color */
+    color: white;
+    border-radius: 50%;
+}
+
+.calendar-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+}
