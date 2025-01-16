@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run client\" \"npm run server\"",
-    "server": "node server.js",
+    "server": "node sample-rest-api/server.js",
     "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
