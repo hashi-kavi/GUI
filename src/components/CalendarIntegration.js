@@ -6,11 +6,14 @@ import '../styles/CalendarIntegration.css';
 const CalendarIntegration = ({ tasks }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const tasksForSelectedDate = tasks.filter(
-    (task) =>
-      new Date(task.completion_date).toISOString().split('T')[0] ===
-      selectedDate.toISOString().split('T')[0]
-  );
+  // Normalize the selected date (set time to 00:00:00) to match against task dates
+  const normalizedSelectedDate = new Date(selectedDate).setHours(0, 0, 0, 0);
+
+  // Filter tasks for the selected date by normalizing the task date as well
+  const tasksForSelectedDate = tasks.filter((task) => {
+    const taskDate = new Date(task.completion_date).setHours(0, 0, 0, 0);
+    return taskDate === normalizedSelectedDate;
+  });
 
   return (
     <div className="calendar-integration">
@@ -19,10 +22,9 @@ const CalendarIntegration = ({ tasks }) => {
         onChange={setSelectedDate}
         value={selectedDate}
         tileClassName={({ date }) => {
+          const taskDate = new Date(date).setHours(0, 0, 0, 0);
           const hasTask = tasks.some(
-            (task) =>
-              new Date(task.completion_date).toISOString().split('T')[0] ===
-              date.toISOString().split('T')[0]
+            (task) => new Date(task.completion_date).setHours(0, 0, 0, 0) === taskDate
           );
           return hasTask ? 'highlight-date' : null;
         }}
