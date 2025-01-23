@@ -33,7 +33,10 @@ const CalendarIntegration = ({ tasks }) => {
       <ul className="task-list">
         {tasksForSelectedDate.length > 0 ? (
           tasksForSelectedDate.map((task, index) => (
-            <li key={index}>
+            <li
+              key={index}
+              className={`task-item ${task.completed ? 'completed-task' : 'pending-task'}`}
+            >
               <strong>{task.title}</strong>: {task.description}
             </li>
           ))

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../styles/LandingPage.css'; // Correct path to the styles folder
+import '../styles/LandingPage.css'; // Ensure the correct path to the styles folder
+import Footer from '../components/Footer'; // Import Footer
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -23,6 +24,11 @@ const LandingPage = () => {
           </button>
         </div>
       </header>
+
+      {/* Main Content (if any) */}
+      <main className="main-content"></main>
+
+      <Footer />
     </div>
   );
 };

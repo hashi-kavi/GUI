@@ -25,7 +25,7 @@ const CalendarPage = () => {
 
   return (
     <div className="calendar-page">
-      <h2>Task Calendar</h2>
+      
       <CalendarIntegration tasks={[...allTasks, ...completedTasks]} />
     </div>
   );
