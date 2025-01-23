@@ -1,6 +1,6 @@
 /* Calendar Page Background */
-.calendar-page {
-    background-image: url('../assets/images/background7.jpg'); /* Specific background for calendar page */
+.calendarbg {
+    background-image: url('../assets/images/bg19.jpg'); /* Ensure correct image path */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -13,27 +13,37 @@
 /* Calendar Container Styles */
 .calendar-container {
     padding: 20px;
-    background-color: #282c34; /* Consistent dark background */
-    border: 1px solid #444; /* Subtle border for separation */
+    background-color: #DFF6E4; /* Soft pastel green for harmony with nature */
+    border: 1px solid #B2D3C2; /* Muted green-gray border for subtle contrast */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: #ffffff;
-    align-items: center;
-    max-width: 600px; /* Adjust width as needed */
-    margin: 100px auto; /* Center the calendar on the page */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Keep shadow subtle */
+    color: #2C5F2D; /* Deep green text for elegance and contrast */
+    max-width: 600px; /* Adjust width for responsiveness */
+    margin: 100px auto; /* Center the calendar */
+    text-align: center;
+}
+
+/* Calendar Title */
+.calendar-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #083D27; /* Darker green for the title */
 }
 
 /* Highlighted Date Styles */
 .react-calendar__tile.highlight-date {
-    background-color: #4CAF50; /* Bright green for highlight */
-    color: #ffffff;
+    background-color: #92D9E3; /* Soft aqua blue to represent tranquility */
+    color: #083D27; /* Dark green text for contrast */
     border-radius: 50%;
     font-weight: bold;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add depth on hover */
 }
 
 .react-calendar__tile.highlight-date:hover {
     transform: scale(1.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Slightly elevated shadow */
 }
 
 /* General Styles */
@@ -43,8 +53,110 @@
     align-items: center;
     margin: 20px;
     padding: 20px;
-    background-color: #1e1e2f; /* Dark background for modern look */
-    color: #ffffff; /* Light text for readability */
+    background-color: #F2EBE9; /* Light neutral beige for balance */
+    color: #2C5F2D; /* Dark green text for natural tones */
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gentle shadow */
+}
+
+/* Calendar Navigation */
+.react-calendar__navigation button {
+    background-color: #A8D5BA; /* Soft pastel green for buttons */
+    color: #083D27; /* Dark text for readability */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.react-calendar__navigation button:hover {
+    background-color: #92D9E3; /* Aqua tone for hover effect */
+    transform: scale(1.05);
+}
+
+/* General Button Styles (if applicable) */
+button {
+    background-color: #A8D5BA; /* Soft pastel green for buttons */
+    color: #083D27; /* Dark text for readability */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #92D9E3; /* Aqua tone for hover effect */
+    transform: scale(1.05);
+}
+
+/* Calendar Grid Styles */
+.react-calendar {
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Match container styling */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+.react-calendar__tile {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.react-calendar__tile:hover {
+    background-color: #A8D5BA; /* Soft pastel green */
+    transform: scale(1.05);
+}
+
+.react-calendar__month-view__days__day--weekend {
+    color: #A83D3D; /* Subtle red for weekends */
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+    color: #B2B2B2; /* Muted gray for other months */
+}
+
+/* Task List Styles */
+.task-list {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    width: 100%;
+    text-align: left;
+}
+
+/* Completed Task Styles */
+.task-list .completed-task {
+    background-color: #A8D5BA; /* Soft pastel green */
+    color: #083D27; /* Dark green for contrast */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    text-decoration: line-through; /* Strike-through for completed tasks */
+}
+
+/* Pending Task Styles */
+.task-list .pending-task {
+    background-color: #F8D7DA; /* Soft red for pending tasks */
+    color: #842029; /* Deep red for readability */
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .calendar-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .calendar-integration {
+        padding: 15px;
+    }
 }

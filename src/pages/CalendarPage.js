@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CalendarIntegration from '../components/CalendarIntegration';
+import '../styles/Calendar.css';
 
 const CalendarPage = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -15,7 +16,6 @@ const CalendarPage = () => {
         const data = await response.json();
         setAllTasks(data.filter((task) => task.status === 'pending'));
         setCompletedTasks(data.filter((task) => task.status === 'completed'));
-        console.log('Fetched Tasks:', data);
       } catch (error) {
         console.error("Error fetching tasks:", error);
       }
@@ -24,8 +24,7 @@ const CalendarPage = () => {
   }, []);
 
   return (
-    <div className="calendar-page">
-      
+    <div className="Calendar-page">
       <CalendarIntegration tasks={[...allTasks, ...completedTasks]} />
     </div>
   );

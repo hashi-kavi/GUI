@@ -16,34 +16,38 @@ const CalendarIntegration = ({ tasks }) => {
   });
 
   return (
-    <div className="calendar-integration">
-      <h1>Task Calendar</h1>
-      <Calendar
-        onChange={setSelectedDate}
-        value={selectedDate}
-        tileClassName={({ date }) => {
-          const taskDate = new Date(date).setHours(0, 0, 0, 0);
-          const hasTask = tasks.some(
-            (task) => new Date(task.completion_date).setHours(0, 0, 0, 0) === taskDate
-          );
-          return hasTask ? 'highlight-date' : null;
-        }}
-      />
-      <h3>Tasks for {selectedDate.toLocaleDateString()}</h3>
-      <ul className="task-list">
-        {tasksForSelectedDate.length > 0 ? (
-          tasksForSelectedDate.map((task, index) => (
-            <li
-              key={index}
-              className={`task-item ${task.completed ? 'completed-task' : 'pending-task'}`}
-            >
-              <strong>{task.title}</strong>: {task.description}
-            </li>
-          ))
-        ) : (
-          <p>No tasks for this date.</p>
-        )}
-      </ul>
+    <div className="calendarbg">
+      <div className="calendar-integration">
+        <h1>Task Calendar</h1>
+        <Calendar
+          onChange={setSelectedDate}
+          value={selectedDate}
+          tileClassName={({ date }) => {
+            const taskDate = new Date(date).setHours(0, 0, 0, 0);
+            const hasTask = tasks.some(
+              (task) => new Date(task.completion_date).setHours(0, 0, 0, 0) === taskDate
+            );
+            return hasTask ? 'highlight-date' : null;
+          }}
+        />
+        <h3>Tasks for {selectedDate.toLocaleDateString()}</h3>
+        <ul className="task-list">
+          {tasksForSelectedDate.length > 0 ? (
+            tasksForSelectedDate.map((task, index) => {
+              return (
+                <li
+                  key={index}
+                  className={`task-item ${task.completed ? 'completed-task' : 'pending-task'}`}
+                >
+                  <strong>{task.title}</strong>: {task.description}
+                </li>
+              );
+            })
+          ) : (
+            <p>No tasks for this date.</p>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };

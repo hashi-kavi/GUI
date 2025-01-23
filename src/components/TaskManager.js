@@ -107,6 +107,7 @@ const TaskManager = () => {
   const tasksToShow = isCompleteScreen ? completedTasks : allTasks;
 
   return (
+    <div className='taskbg'>
     <div className="task-manager">
       <h1>MY TASKS</h1>
       <div className="task-input">
@@ -194,7 +195,7 @@ const TaskManager = () => {
       <Link to="/calendar">
         <button className="primaryBtn">Go to Calendar</button>
       </Link>
-    </div>
+    </div></div>
   );
 };
 

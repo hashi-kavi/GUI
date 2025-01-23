@@ -1,10 +1,9 @@
 import React from 'react';
-import '../styles/Footer.css'; // Import the CSS file for styling
+import '../styles/Footer.css'; 
 
 const Footer = () => {
   return (
     <footer className="footer">
-      {/* Footer Middle Section */}
       <div className="footer-middle">
         <div className="footer-column">
           <h3>Contact Us</h3>
@@ -40,7 +39,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Footer Bottom Section */}
       <div className="footer-bottom">
         <p>&copy; 2025 TaskPro. All Rights Reserved.</p>
       </div>

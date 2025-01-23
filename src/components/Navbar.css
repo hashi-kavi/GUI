@@ -1,6 +1,6 @@
 /* General Navbar Styles */
 nav {
-  background-color: #282828; /* Dark background for the navbar */
+  background-color: #A8D5BA; /* Soft Green background for the navbar */
   display: flex;
   justify-content: space-between; /* Space between logo, nav links, and auth buttons */
   align-items: center;
@@ -11,17 +11,14 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   transition: background-color 0.3s, box-shadow 0.3s;
-  height: 60px;
-  
-  
-  
+  height: 70px;
 }
-.navbar-container{
+
+.navbar-container {
   display: flex;
   align-items: center;
   flex-grow: 1;
-  height: 100%;
-  
+  height: 50%;
 }
 
 /* Style for when the page is scrolled */
@@ -31,26 +28,26 @@ nav.scrolled {
 }
 
 /* Logo Styles */
-
+/* Logo Styles */
 .logo h2 {
-  color: #00E676; /* Electric green for the logo */
+  color: #2C3E50; /* Darker shade for better contrast (Gentle Gray) */
   font-size: 24px;
   font-weight: bold;
   margin: 0;
   line-height: normal;
   display: flex;
-  align-items: center; 
-}
+  align-items: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for visibility */
 
+}
 /* Navigation Links (Home, About, Contact) */
 .nav-links {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 50%;
+  height: 90%;
   align-items: center;
-  
 }
 
 .nav-links li {
@@ -59,7 +56,7 @@ nav.scrolled {
 
 .nav-links a {
   text-decoration: none;
-  color: #e0e0e0; /* Light gray for the links */
+  color: #34495E; /* Muted Navy for the links */
   padding: 0 20px;
   transition: background-color 0.3s, color 0.3s;
   border-radius: 5px;
@@ -71,9 +68,9 @@ nav.scrolled {
 }
 
 .nav-links a:hover {
-  background-color: #444; /* Dark hover background */
-  color: #ffffff; /* White text on hover */
-  height: 30px;
+  background-color: #F5DEB3; /* Warm Beige on hover */
+  color: #083D27; /* Deep Green text on hover */
+  height: 40px;
 }
 
 /* Hamburger Menu for Mobile */
@@ -81,7 +78,7 @@ nav.scrolled {
   display: none;
   font-size: 24px;
   cursor: pointer;
-  color: #e0e0e0; /* Light gray for the hamburger icon */
+  color: #34495E; /* Muted Navy for the hamburger icon */
   transition: transform 0.2s;
 }
 
@@ -106,11 +103,11 @@ nav.scrolled {
 }
 
 .login-button {
-  background-color: #00E676; /* Green login button */
+  background-color: #87CEEB; /* Sky Blue for login button */
 }
 
 .signup-button {
-  background-color: #00B0FF; /* Orange signup button */
+  background-color: #71d097; /* Soft Green for signup button */
 }
 
 .auth-button:hover {
@@ -122,14 +119,12 @@ nav.scrolled {
   display: none;
   flex-direction: row;
   align-items: flex-start;
-  background-color: #282828; /* Dark background for dropdown menu */
+  background-color: #A8D5BA; /* Soft Green for dropdown */
   width: 100%;
-  padding:0px 60px;
+  padding: 0px 60px;
   margin: 0 auto;
   margin-top: 30px;
   align-items: center;
-  
-
 }
 
 .nav-links.active {
@@ -193,4 +188,4 @@ nav.scrolled {
     width: auto;
     text-align: center;
   }
-} 
+}

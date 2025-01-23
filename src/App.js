@@ -8,17 +8,17 @@ import SignUpPage from './pages/SignUpPage';
 import Navbar from './components/Navbar';
 import CalendarPage from './pages/CalendarPage'; // Import CalendarPage
 import '@fortawesome/fontawesome-free/css/all.min.css';
-
+import Footer from './components/Footer'; // Import Footer
 
 const App = () => {
   return (
     <Router>
-      <div>
+      <div className="app-container">
         {/* Navbar is displayed on all pages */}
         <Navbar />
 
         {/* Main content area where pages are rendered */}
-        <main>
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<LandingPage />} /> {/* Landing Page as Home */}
             <Route path="/taskmanager" element={<TaskManager />} />
@@ -27,8 +27,10 @@ const App = () => {
             <Route path="/calendar" element={<CalendarPage />} />
           </Routes>
         </main>
+
+        {/* Footer */}
+        <Footer />
       </div>
-      <footer/>
     </Router>
   );
 };
