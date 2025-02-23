@@ -21,6 +21,14 @@ nav {
   height: 50%;
 }
 
+.logout-item {
+  position: absolute;
+  right: 10px; /* Adjust for spacing from the right */
+  top: 50%; /* Vertically align it in the middle */
+  transform: translateY(-50%); /* Fine-tune the vertical position */
+}
+
+
 /* Style for when the page is scrolled */
 nav.scrolled {
   background-color: #1e1e1e; /* Darker background when scrolled */
@@ -188,4 +196,16 @@ nav.scrolled {
     width: auto;
     text-align: center;
   }
+}
+/* Ensure the navbar has a relative position to place elements inside */
+.navbar-container {
+  position: relative;
+}
+
+/* Position the logout button to the right */
+.logout-container {
+  position: absolute;
+  right: 10px; /* Adjust this value for more or less space from the right edge */
+  top: 50%; /* Vertically center the button */
+  transform: translateY(-50%); /* Correct vertical alignment */
 }

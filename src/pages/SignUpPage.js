@@ -1,48 +1,50 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/SignUpPage.css'; // Importing the CSS file
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import '../styles/SignUpPage.css';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Here we are just skipping the actual sign-up logic and directly going to TaskManager
-    navigate('/taskmanager'); // Navigate directly to the TaskManager page
+    try {
+      const response = await axios.post('http://localhost:5000/signup', { email, password });
+      if (response.data.message === 'User created successfully') {
+        localStorage.setItem('userId', response.data.userId); // Save userId to localStorage
+        navigate('/taskmanager'); // Redirect to task manager page
+      }
+    } catch (err) {
+      if (err.response && err.response.data.error === 'User already exists') {
+        setError('Email already exists. Please use a different email.');
+      } else {
+        setError('Sign-up failed. Please try again.');
+      }
+    }
   };
 
   return (
-    <div className='authContainer'> {/* Applying the authContainer class */}
-    <div className='authCard'> {/* Applying the authCard class */}
-        <h1 className='heading'>Sign Up</h1> {/* Applying the heading class */}
+    <div className="authContainer">
+      <div className="authCard">
+        <h1 className="heading">Sign Up</h1>
+        {error && <p>{error}</p>}
         <form onSubmit={handleSubmit}>
-            <div children='inputGroup'> {/* Applying the inputGroup class */}
-
-        <input
-        className='input' // Applying the input class
-          type="text"
-          placeholder="Full Name"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        </div>
-        <div className='inputGroup'> {/* Applying the inputGroup class */}
-        <input
-       className='input' // Applying the input class\
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-        />
-        </div>
-        <div className="inputGroup"> {/* Applying the inputGroup class */}
+          <div className="inputGroup">
             <input
-              className="input" // Applying the input class
+              className="input"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          <div className="inputGroup">
+            <input
+              className="input"
               type="password"
               placeholder="Password"
               value={password}
@@ -50,32 +52,19 @@ const SignUpPage = () => {
               required
             />
           </div>
-          <button className="authBtn" type="submit"> {/* Applying the authBtn class */}
+          <button className="authBtn" type="submit">
             Sign Up
           </button>
         </form>
-        <p className="paragraph"> {/* Applying the paragraph class */}
+        <p className="paragraph">
           Already have an account?{' '}
-          <a href="/login" className="link"> {/* Applying the link class */}
+          <Link to="/login" className="link">
             Login
-          </a>
+          </Link>
         </p>
       </div>
     </div>
-    
-
   );
 };
 
 export default SignUpPage;
-
-
-
-
-
-
-
-
-
-
-

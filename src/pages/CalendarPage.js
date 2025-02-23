@@ -5,11 +5,12 @@ import '../styles/Calendar.css';
 const CalendarPage = () => {
   const [allTasks, setAllTasks] = useState([]);
   const [completedTasks, setCompletedTasks] = useState([]);
+  const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:5000/tasks');
+        const response = await fetch(`http://localhost:5000/tasks?user_id=${userId}`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -21,7 +22,7 @@ const CalendarPage = () => {
       }
     };
     fetchTasks();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="Calendar-page">

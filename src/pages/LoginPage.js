@@ -1,27 +1,36 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Add Link here
+import axios from 'axios';
 import '../styles/LoginPage.css'; // Importing the CSS file
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Skipping the actual login check and directly going to TaskManager
-    navigate('/taskmanager'); // Navigate directly to the TaskManager page
+    try {
+      const response = await axios.post('http://localhost:5000/login', { email, password });
+      if (response.data.message === 'Login successful') {
+        localStorage.setItem('userId', response.data.userId); // Store user ID
+        navigate('/taskmanager'); // Redirect to task manager page
+      }
+    } catch (err) {
+      setError('Login failed. Please try again.');
+    }
   };
 
   return (
-    <div className="authContainer"> {/* Applying the authContainer class */}
-      <div className="authCard"> {/* Applying the authCard class */}
-        <h1 className="heading">Login</h1> {/* Applying the heading class */}
+    <div className="authContainer">
+      <div className="authCard">
+        <h1 className="heading">Login</h1>
+        {error && <p>{error}</p>}
         <form onSubmit={handleSubmit}>
-          <div className="inputGroup"> {/* Applying the inputGroup class */}
+          <div className="inputGroup">
             <input
-              className="input" // Applying the input class
+              className="input"
               type="email"
               placeholder="Email"
               value={email}
@@ -29,9 +38,9 @@ const LoginPage = () => {
               required
             />
           </div>
-          <div className="inputGroup"> {/* Applying the inputGroup class */}
+          <div className="inputGroup">
             <input
-              className="input" // Applying the input class
+              className="input"
               type="password"
               placeholder="Password"
               value={password}
@@ -39,15 +48,15 @@ const LoginPage = () => {
               required
             />
           </div>
-          <button className="authBtn" type="submit"> {/* Applying the authBtn class */}
+          <button className="authBtn" type="submit">
             Login
           </button>
         </form>
-        <p className="paragraph"> {/* Applying the paragraph class */}
+        <p className="paragraph">
           Don't have an account?{' '}
-          <a href="/signup" className="link"> {/* Applying the link class */}
+          <Link to="/signup" className="link">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>

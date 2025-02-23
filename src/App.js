@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import CalendarPage from './pages/CalendarPage'; // Import CalendarPage
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Footer from './components/Footer'; // Import Footer
+import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 
 const App = () => {
   return (
@@ -21,10 +22,24 @@ const App = () => {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<LandingPage />} /> {/* Landing Page as Home */}
-            <Route path="/taskmanager" element={<TaskManager />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
-            <Route path="/calendar" element={<CalendarPage />} />
+            <Route
+              path="/taskmanager"
+              element={
+                <ProtectedRoute>
+                  <TaskManager />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/calendar"
+              element={
+                <ProtectedRoute>
+                  <CalendarPage />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
 

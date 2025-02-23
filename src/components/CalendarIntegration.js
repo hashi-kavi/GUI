@@ -37,7 +37,7 @@ const CalendarIntegration = ({ tasks }) => {
               return (
                 <li
                   key={index}
-                  className={`task-item ${task.completed ? 'completed-task' : 'pending-task'}`}
+                  className={`task-item ${task.status === 'completed' ? 'completed-task' : 'pending-task'}`}
                 >
                   <strong>{task.title}</strong>: {task.description}
                 </li>
