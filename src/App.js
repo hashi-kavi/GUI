@@ -10,6 +10,7 @@ import CalendarPage from './pages/CalendarPage'; // Import CalendarPage
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Footer from './components/Footer'; // Import Footer
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
+import About from './pages/About';
 
 const App = () => {
   return (
@@ -40,6 +41,8 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+            <Route path="/about" element={<About/>} />
+
           </Routes>
         </main>
 

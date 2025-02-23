@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logout from './Logout'; // Import the Logout component
 import './Navbar.css';
+import logo from '../assets/images/7.png'; // Import the logo image
 
 const Navbar = () => {
   const userId = localStorage.getItem('userId'); // Used for conditional rendering
@@ -18,15 +19,18 @@ const Navbar = () => {
   return (
     <nav>
       <div className="navbar-container">
-        {/* Logo */}
-        <div className="logo">
-          <h2>TasksPro</h2>
+      <div className="logo">
+      <div className="logo-image"> 
+          <img src={logo} alt="Logo"/>
+          </div>
+       <h2>TasksPro</h2>
         </div>
+      
 
-        {/* Hamburger Menu */}
+        {/* Hamburger Menu */
         <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           ☰
-        </div>
+        </div>}
 
         {/* Navigation Links */}
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
@@ -61,9 +65,8 @@ const Navbar = () => {
           <li>
             <Link to="/about">About</Link>
           </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
+          
+          
         </ul>
       </div>
 
