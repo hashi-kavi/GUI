@@ -19,18 +19,18 @@ const Navbar = () => {
   return (
     <nav>
       <div className="navbar-container">
-      <div className="logo">
-      <div className="logo-image"> 
+        <div className="logo">
+        <div className="logo-image"> 
           <img src={logo} alt="Logo"/>
-          </div>
-       <h2>TasksPro</h2>
+        </div>
+        <h2>TasksPro</h2>
         </div>
       
 
         {/* Hamburger Menu */
-        <div className="hamburger" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          ☰
-        </div>}
+        <div className="hamburger" onClick={() => { setIsMenuOpen(!isMenuOpen); console.log(isMenuOpen); }}>
+        ☰
+      </div>}
 
         {/* Navigation Links */}
         <ul className={`nav-links ${isMenuOpen ? 'active' : ''}`}>
@@ -41,16 +41,22 @@ const Navbar = () => {
             // Links for logged-in users
             <>
               <li>
-                <Link to="/taskmanager">Task Manager</Link>
+                <Link className='task_manager' to="/taskmanager">Task Manager</Link>
               </li>
               <li>
                 <Link to="/calendar">Calendar</Link>
               </li>
               <li>
-                <Logout /> {/* Show Logout button when logged in */}
-              </li>
+            <Link to="/about">About</Link>
+          </li>
+          <div className="logout">
+            <Logout/> {/* Show Logout button when logged in */}
+          </div>
             </>
-          ) : (
+            
+            
+          ) :
+           (
             // Links for non-logged-in users
             <>
               <li>
@@ -62,13 +68,10 @@ const Navbar = () => {
               
             </>
           )}
-          <li>
-            <Link to="/about">About</Link>
-          </li>
           
+          </ul>
           
-        </ul>
-      </div>
+          </div>
 
       {/* Auth buttons for landing page */}
       {isLandingPage && !userId && (

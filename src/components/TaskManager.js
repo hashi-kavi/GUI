@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/TaskComponents.css';
 import { AiOutlineDelete } from 'react-icons/ai';
+import bell from '../assets/images/bell.png'; // Import the bell image
 
 const TaskManager = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -10,6 +11,7 @@ const TaskManager = () => {
   const [newTitle, setNewTitle] = useState('');
   const [newDescription, setNewDescription] = useState('');
   const [completionDate, setCompletionDate] = useState('');
+  const [reminderTime, setReminderTime] = useState('');
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
 
@@ -36,6 +38,7 @@ const TaskManager = () => {
       title: newTitle,
       description: newDescription,
       completion_date: completionDate,
+      reminder_time: reminderTime, // Include reminder_time
       status: 'pending',
       user_id: userId, // Include the user_id in the new task
     };
@@ -43,10 +46,11 @@ const TaskManager = () => {
     try {
       const response = await axios.post('http://localhost:5000/tasks', newTask);
       const addedTask = response.data;
-      setAllTasks([...allTasks, addedTask]);
+      setAllTasks((prevTasks) => [...prevTasks, addedTask]);
       setNewTitle('');
       setNewDescription('');
       setCompletionDate('');
+      setReminderTime('');
     } catch (error) {
       console.error('Error adding task:', error);
     }
@@ -60,8 +64,8 @@ const TaskManager = () => {
 
       if (response.status === 200) {
         const completedTask = allTasks.find((task) => task.id === taskId);
-        setCompletedTasks([...completedTasks, { ...completedTask, status: 'completed' }]);
-        setAllTasks(allTasks.filter((task) => task.id !== taskId));
+        setCompletedTasks((prevTasks) => [...prevTasks, { ...completedTask, status: 'completed' }]);
+        setAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
       }
     } catch (error) {
       console.error('Error completing task:', error);
@@ -74,16 +78,64 @@ const TaskManager = () => {
 
       if (response.status === 200) {
         if (isCompleted) {
-          setCompletedTasks(completedTasks.filter((task) => task.id !== taskId));
+          setCompletedTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
         } else {
-          setAllTasks(allTasks.filter((task) => task.id !== taskId));
+          setAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
         }
       }
     } catch (error) {
       console.error('Error deleting task:', error);
     }
   };
+  useEffect(() => {
+    if (Notification.permission !== "granted") {
+      Notification.requestPermission();
+    }
+  }, []);
+  useEffect(() => {
+    const checkReminders = () => {
+      allTasks.forEach(async (task) => {
+        if (task.reminder_time) {
+          const reminderTime = new Date(task.reminder_time).getTime();
+          const now = new Date().getTime();
+  
+          if (reminderTime <=  now) {
+            new Notification("Task Reminder", {
+              body: `Reminder for: ${task.title}`,
+              icon: bell
+            });
+  
+            // Remove the reminder from the frontend
+            setAllTasks((prev) =>
+              prev.map((t) =>
+                t.id === task.id ? { ...t, reminder_time: null } : t
+              )
+            );
+             // Update the task in the backend to remove reminder_time
+          try {
+            await axios.put(`http://localhost:5000/tasks/${task.id}`, {
+              reminder_time: null, // Remove reminder after showing it
+            });
 
+            // Update the state to remove the reminder from frontend
+            setAllTasks((prev) =>
+              prev.map((t) =>
+                t.id === task.id ? { ...t, reminder_time: null } : t
+              )
+            );
+          } catch (error) {
+            console.error("Error updating reminder status:", error);
+          }
+          }
+        }
+      });
+    };
+  
+    const interval = setInterval(checkReminders, 60000); // Check every minute
+    return () => clearInterval(interval);
+  }, [allTasks]);
+  
+  
   const tasksToShow = isCompleteScreen ? completedTasks : allTasks;
 
   return (
@@ -115,6 +167,14 @@ const TaskManager = () => {
               type="date"
               value={completionDate}
               onChange={(e) => setCompletionDate(e.target.value)}
+            />
+          </div>
+          <div className="task-input-item">
+            <label>Reminder Time</label>
+            <input
+              type="datetime-local"
+              value={reminderTime}
+              onChange={(e) => setReminderTime(e.target.value)}
             />
           </div>
           <button onClick={handleAddTask} className="primaryBtn">
@@ -149,6 +209,9 @@ const TaskManager = () => {
                   <h3>{task.title}</h3>
                   <p>{task.description}</p>
                   <p><strong>Completion Date:</strong> {task.completion_date}</p>
+                  {task.reminder_time && (
+                    <p><strong>Reminder Time:</strong> {task.reminder_time}</p>
+                  )}
                 </div>
                 <div className="task-actions">
                   {!isCompleteScreen && (
@@ -167,7 +230,6 @@ const TaskManager = () => {
                 </div>
               </div>
             ))
-            
           )}
         </div>
 
