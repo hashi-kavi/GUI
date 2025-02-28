@@ -15,7 +15,14 @@ const TaskManager = () => {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
   const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
 
-  useEffect(() => {
+  useEffect(() => {console.log('allTasks:', allTasks);
+console.log('completedTasks:', completedTasks);
+console.log('newTitle:', newTitle);
+console.log('newDescription:', newDescription);
+console.log('completionDate:', completionDate);
+console.log('reminderTime:', reminderTime);
+console.log('isCompleteScreen:', isCompleteScreen);
+console.log('userId:', userId);
     const fetchTasks = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/tasks?user_id=${userId}`);
