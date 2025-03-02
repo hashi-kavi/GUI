@@ -12,11 +12,11 @@ export default function About() {
       </p>
       <h3>Key Features:</h3>
       <ul>
-        <li>📌 Create, edit, and delete tasks</li>
-        <li>📅 Calendar integration for scheduling</li>
-        <li>✅ Mark tasks as completed</li>
-        <li>🔔 Set reminders and deadlines</li>
-        <li>📊 Track your productivity</li>
+        <li>Create, edit, and delete tasks</li>
+        <li>Calendar integration for scheduling</li>
+        <li>Mark tasks as completed</li>
+        <li>Set reminders and deadlines</li>
+        <li>Track your productivity</li>
       </ul>
       <h2>Why Use TasksPro?</h2>
       <p>

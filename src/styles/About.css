@@ -26,6 +26,7 @@
     list-style-type: none;
     padding: 10px;;
     color: #666;
+    list-style-type : disc;
 }
 .about-container ul li{
     font-size: 18px;

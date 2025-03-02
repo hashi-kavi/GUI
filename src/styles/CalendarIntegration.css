@@ -98,6 +98,10 @@ button:hover {
     border: none; /* Remove default border */
     border-radius: 10px; /* Match container styling */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    width: 500px;
+    height: 400px;
+
+    
 }
 
 .react-calendar__tile {

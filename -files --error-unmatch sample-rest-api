@@ -1,0 +1,35 @@
+[33mcommit 930c638807a4401f6546cba0370c846eaded3e23[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Sat Mar 1 01:38:21 2025 +0530
+
+    Adding or modifying sample-rest-api
+
+[33mcommit 72a532dda6cae9ad7d4b96a9f7978890dda4cced[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Sun Feb 23 21:48:25 2025 +0530
+
+    Your commit message here
+
+[33mcommit 7d69d7fbb5776d6fe3b66717e42a8ff8d0043859[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Thu Jan 23 09:49:34 2025 +0530
+
+    Update submodule reference
+
+[33mcommit f20ee26e047a9e19dce00d24b2e7f1576f0ccaa0[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Fri Jan 17 02:29:24 2025 +0530
+
+    Added concurrently for running client and server simultaneously
+
+[33mcommit 9cbf0acc7824df17541ddb862b082bd23277086c[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Fri Jan 17 01:25:48 2025 +0530
+
+    Removed sample-rest-api folder
+
+[33mcommit 1305d93d9e3bc778f9aeb7e89bef22b1a3d74ab3[m
+Author: hashi-kavi <kavindyaranaweera14@gmail.com>
+Date:   Thu Jan 16 21:40:41 2025 +0530
+
+    Implemented navbar feature

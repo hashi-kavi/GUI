@@ -24,11 +24,13 @@ body {
 /* Task Manager Container */
 .task-manager {
   max-width: 800px;
-  margin: 140px auto;
+  margin: 80px auto;
   padding: 20px;
+  margin-top: 160px;
   background-color: #A5D6A7; /* Soft green for tranquility */
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
 }
 
 /* Header Styles */

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logout from './Logout'; // Import the Logout component
 import './Navbar.css';
-import logo from '../assets/images/7.png'; // Import the logo image
-
+import logo from '../assets/images/7.png';
 const Navbar = () => {
   const userId = localStorage.getItem('userId'); // Used for conditional rendering
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -21,12 +20,11 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="logo">
         <div className="logo-image"> 
-          <img src={logo} alt="Logo"/>
+        <img src={logo} alt="Logo" />
         </div>
         <h2>TasksPro</h2>
         </div>
       
-
         {/* Hamburger Menu */
         <div className="hamburger" onClick={() => { setIsMenuOpen(!isMenuOpen); console.log(isMenuOpen); }}>
         ☰
@@ -49,9 +47,7 @@ const Navbar = () => {
               <li>
             <Link to="/about">About</Link>
           </li>
-          <div className="logout">
-            <Logout/> {/* Show Logout button when logged in */}
-          </div>
+         
             </>
             
             
@@ -68,9 +64,13 @@ const Navbar = () => {
               
             </>
           )}
-          
-          </ul>
-          
+           </ul>
+          {/* Logout button (only when logged in) */}
+        {userId && (
+          <div className="logout">
+            <Logout /> {/* Show Logout button when logged in */}
+          </div>
+        )}
           </div>
 
       {/* Auth buttons for landing page */}
