@@ -1,0 +1,118 @@
+﻿<Window x:Class="Taskmanager.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Taskmanager"
+        mc:Ignorable="d"
+        Title="Task Manager" Height="450" Width="800">
+
+    <!-- Define Styles within Window.Resources -->
+    <Window.Resources>
+        <!-- Style for CheckBox inside DataGrid -->
+        <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
+            <Setter Property="Foreground" Value="#333"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="400"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Background>
+            <ImageBrush ImageSource="images/bg14.jpg" Stretch="UniformToFill" Opacity="0.7" />
+        </Grid.Background>
+        <!-- Header Text -->
+        <TextBlock Grid.Row="0" Grid.Column="0"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Center"
+                   FontSize="25"
+                   FontWeight="Bold"
+                   Foreground="DarkGreen"
+                   Text="MY TASKS"/>
+
+        <!-- Task List DataGrid -->
+        <DataGrid Background ="Transparent"  x:Name="TaskGrid"
+                  Grid.Row="1" Grid.Column="0"
+                  AutoGenerateColumns="False"
+                  Margin="10"
+                  VerticalAlignment="Stretch"
+                  HorizontalAlignment="Stretch" SelectionChanged="TaskGrid_SelectionChanged">
+           
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*" Foreground="#333"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*" Foreground="#333"/>
+                <DataGridTextColumn Header="Due Date" Binding="{Binding DueDate, StringFormat='{}{0:MM/dd/yyyy}'}" Width="*" Foreground="#333"/>
+
+                <!-- DataGridCheckBoxColumn with applied CheckBoxStyle -->
+                <DataGridCheckBoxColumn Header="Completed" Binding="{Binding IsCompleted}" Width="*">
+                    <DataGridCheckBoxColumn.ElementStyle>
+                        <Style TargetType="CheckBox">
+                            <Setter Property="Foreground" Value="#333"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridCheckBoxColumn.ElementStyle>
+                </DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button FontSize="14" Padding="10" Background="#4CAF50" Foreground="White" Margin="5" Click="Add_Task">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                Add Task
+            </Button>
+
+            <Button FontSize="14" Padding="10" Background="#8BC34A" Foreground="White" Margin="5" Click="Update_Task">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                Update Task
+            </Button>
+
+            <Button FontSize="14" Padding="10" Background="OrangeRed" Foreground="White" Margin="5" Click="Delete_Task">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                Delete Task
+            </Button>
+
+            <Button FontSize="14" Padding="10" Background="#9E9E9E" Foreground="White" Margin="5" Click="Mark_Complete">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                Mark as Complete
+            </Button>
+        </StackPanel>
+
+
+    </Grid>
+</Window>
