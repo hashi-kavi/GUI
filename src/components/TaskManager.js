@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/TaskComponents.css';
 import { AiOutlineDelete } from 'react-icons/ai';
-import bell from '../assets/images/bell.png'; // Import the bell image
+import bell from '../assets/images/bell.png';
 
 const TaskManager = () => {
   const [allTasks, setAllTasks] = useState([]);
@@ -13,21 +13,15 @@ const TaskManager = () => {
   const [completionDate, setCompletionDate] = useState('');
   const [reminderTime, setReminderTime] = useState('');
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
-  const userId = localStorage.getItem('userId'); // Get the logged-in user's ID
+  const userId = localStorage.getItem('userId');
 
-  useEffect(() => {console.log('allTasks:', allTasks);
-console.log('completedTasks:', completedTasks);
-console.log('newTitle:', newTitle);
-console.log('newDescription:', newDescription);
-console.log('completionDate:', completionDate);
-console.log('reminderTime:', reminderTime);
-console.log('isCompleteScreen:', isCompleteScreen);
-console.log('userId:', userId);
+  // Fetch tasks from the server
+  useEffect(() => {
     const fetchTasks = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/tasks?user_id=${userId}`);
-        setAllTasks(response.data.filter((task) => task.status === 'pending'));
-        setCompletedTasks(response.data.filter((task) => task.status === 'completed'));
+        setAllTasks(response.data.filter(task => task.status === 'pending'));
+        setCompletedTasks(response.data.filter(task => task.status === 'completed'));
       } catch (error) {
         console.error('Error fetching tasks:', error);
       }
@@ -35,8 +29,9 @@ console.log('userId:', userId);
     fetchTasks();
   }, [userId]);
 
+  // Add a new task
   const handleAddTask = async () => {
-    if (newTitle.trim() === '' || newDescription.trim() === '' || !completionDate) {
+    if (!newTitle || !newDescription || !completionDate) {
       alert('Please fill in all fields.');
       return;
     }
@@ -45,15 +40,14 @@ console.log('userId:', userId);
       title: newTitle,
       description: newDescription,
       completion_date: completionDate,
-      reminder_time: reminderTime, // Include reminder_time
+      reminder_time: reminderTime,
       status: 'pending',
-      user_id: userId, // Include the user_id in the new task
+      user_id: userId,
     };
 
     try {
       const response = await axios.post('http://localhost:5000/tasks', newTask);
-      const addedTask = response.data;
-      setAllTasks((prevTasks) => [...prevTasks, addedTask]);
+      setAllTasks([...allTasks, response.data]);
       setNewTitle('');
       setNewDescription('');
       setCompletionDate('');
@@ -63,86 +57,52 @@ console.log('userId:', userId);
     }
   };
 
+  // Mark a task as completed
   const handleCompleteTask = async (taskId) => {
     try {
-      const response = await axios.put(`http://localhost:5000/tasks/${taskId}`, {
-        status: 'completed',
-      });
-
-      if (response.status === 200) {
-        const completedTask = allTasks.find((task) => task.id === taskId);
-        setCompletedTasks((prevTasks) => [...prevTasks, { ...completedTask, status: 'completed' }]);
-        setAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-      }
+      await axios.put(`http://localhost:5000/tasks/${taskId}`, { status: 'completed' });
+      const completedTask = allTasks.find(task => task.id === taskId);
+      setCompletedTasks([...completedTasks, { ...completedTask, status: 'completed' }]);
+      setAllTasks(allTasks.filter(task => task.id !== taskId));
     } catch (error) {
       console.error('Error completing task:', error);
     }
   };
 
+  // Delete a task
   const handleDeleteTask = async (taskId, isCompleted) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/tasks/${taskId}`);
-
-      if (response.status === 200) {
-        if (isCompleted) {
-          setCompletedTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-        } else {
-          setAllTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
-        }
+      await axios.delete(`http://localhost:5000/tasks/${taskId}`);
+      if (isCompleted) {
+        setCompletedTasks(completedTasks.filter(task => task.id !== taskId));
+      } else {
+        setAllTasks(allTasks.filter(task => task.id !== taskId));
       }
     } catch (error) {
       console.error('Error deleting task:', error);
     }
   };
+
+  // Check for reminders
   useEffect(() => {
-    if (Notification.permission !== "granted") {
+    if (Notification.permission !== 'granted') {
       Notification.requestPermission();
     }
-  }, []);
-  useEffect(() => {
+
     const checkReminders = () => {
       allTasks.forEach(async (task) => {
-        if (task.reminder_time) {
-          const reminderTime = new Date(task.reminder_time).getTime();
-          const now = new Date().getTime();
-  
-          if (reminderTime <=  now) {
-            new Notification("Task Reminder", {
-              body: `Reminder for: ${task.title}`,
-              icon: bell
-            });
-  
-            // Remove the reminder from the frontend
-            setAllTasks((prev) =>
-              prev.map((t) =>
-                t.id === task.id ? { ...t, reminder_time: null } : t
-              )
-            );
-             // Update the task in the backend to remove reminder_time
-          try {
-            await axios.put(`http://localhost:5000/tasks/${task.id}`, {
-              reminder_time: null, // Remove reminder after showing it
-            });
-
-            // Update the state to remove the reminder from frontend
-            setAllTasks((prev) =>
-              prev.map((t) =>
-                t.id === task.id ? { ...t, reminder_time: null } : t
-              )
-            );
-          } catch (error) {
-            console.error("Error updating reminder status:", error);
-          }
-          }
+        if (task.reminder_time && new Date(task.reminder_time).getTime() <= Date.now()) {
+          new Notification('Task Reminder', { body: `Reminder for: ${task.title}`, icon: bell });
+          await axios.put(`http://localhost:5000/tasks/${task.id}`, { reminder_time: null });
+          setAllTasks(allTasks.map(t => (t.id === task.id ? { ...t, reminder_time: null } : t)));
         }
       });
     };
-  
+
     const interval = setInterval(checkReminders, 60000); // Check every minute
     return () => clearInterval(interval);
   }, [allTasks]);
-  
-  
+
   const tasksToShow = isCompleteScreen ? completedTasks : allTasks;
 
   return (
@@ -223,11 +183,12 @@ console.log('userId:', userId);
                 <div className="task-actions">
                   {!isCompleteScreen && (
                     <span
-                      className="icon complete-icon"
-                      onClick={() => handleCompleteTask(task.id)}
-                    >
-                      ✅
-                    </span>
+                    className="icon complete-icon"
+                    onClick={() => handleCompleteTask(task.id)}
+                  >
+                    <span role="img" aria-label="completed task">✅</span>
+                  </span>
+                  
                   )}
                   <AiOutlineDelete
                     className="icon delete-icon"

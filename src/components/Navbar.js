@@ -42,6 +42,10 @@ const Navbar = () => {
                 <Link className='task_manager' to="/taskmanager">Task Manager</Link>
               </li>
               <li>
+            <Link to="/PomodoroTimer">Pomodoro</Link>
+          </li>
+          
+            <li>
                 <Link to="/calendar">Calendar</Link>
               </li>
               <li>

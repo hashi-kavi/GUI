@@ -17,11 +17,13 @@ const CalendarIntegration = ({ tasks }) => {
 
   return (
     <div className="calendarbg">
+      
       <div className="calendar-integration">
         <h1>Task Calendar</h1>
         <Calendar
           onChange={setSelectedDate}
           value={selectedDate}
+          // highlight the dates with tasks
           tileClassName={({ date }) => {
             const taskDate = new Date(date).setHours(0, 0, 0, 0);
             const hasTask = tasks.some(
@@ -30,7 +32,9 @@ const CalendarIntegration = ({ tasks }) => {
             return hasTask ? 'highlight-date' : null;
           }}
         />
+        
         <h3>Tasks for {selectedDate.toLocaleDateString()}</h3>
+        {/* Display tasks for the selected date */}
         <ul className="task-list">
           {tasksForSelectedDate.length > 0 ? (
             tasksForSelectedDate.map((task, index) => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // ✅ Import Link
+import { Link } from 'react-router-dom'; 
 import '../styles/About.css';
 
 export default function About() {
@@ -7,8 +7,10 @@ export default function About() {
     <div className="about-container">
       <h1>About TaskPro</h1>
       <p>
-        TasksPro is a productivity-focused task management application designed to help you 
-        stay organized, boost efficiency, and track your tasks effortlessly.
+        TasksPro is a productivity-focused task management 
+       application designed to help you 
+        stay organized, boost efficiency,
+        <br /> and track your tasks effortlessly.
       </p>
       <h3>Key Features:</h3>
       <ul>

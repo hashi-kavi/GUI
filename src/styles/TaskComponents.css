@@ -4,12 +4,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  height: 100vh;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #C8E6C9; /* Soft minty green fallback background */
   animation: gradient-shift 90s ease infinite; /* Subtle gradient animation */
+  
 }
 
 /* General Body Styles */
@@ -19,6 +20,7 @@ body {
   color: #2E7D32; /* Deep forest green text for readability */
   margin: 0;
   padding: 0;
+  display : flex;
 }
 
 /* Task Manager Container */
@@ -68,6 +70,7 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-right: 10px;
 }
 
 .primaryBtn:hover {
@@ -178,6 +181,7 @@ h1 {
   width: 100%;
   box-sizing: border-box;
 }
+
 
 .task-input-item input:focus {
   border-color: #8BC34A; /* Brighter green on focus */

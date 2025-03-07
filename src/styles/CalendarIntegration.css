@@ -8,28 +8,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 80px;
+    
 }
 
-/* Calendar Container Styles */
-.calendar-container {
-    padding: 20px;
-    background-color: #DFF6E4; /* Soft pastel green for harmony with nature */
-    border: 1px solid #B2D3C2; /* Muted green-gray border for subtle contrast */
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Keep shadow subtle */
-    color: #2C5F2D; /* Deep green text for elegance and contrast */
-    max-width: 600px; /* Adjust width for responsiveness */
-    margin: 100px auto; /* Center the calendar */
-    text-align: center;
-}
 
-/* Calendar Title */
-.calendar-container h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #083D27; /* Darker green for the title */
-}
+
 
 /* Highlighted Date Styles */
 .react-calendar__tile.highlight-date {
@@ -76,6 +60,13 @@
     transform: scale(1.05);
 }
 
+/* Calendar Title */
+.calendar-container h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #083D27; /* Darker green for the title */
+}
 /* General Button Styles (if applicable) */
 button {
     background-color: #A8D5BA; /* Soft pastel green for buttons */
@@ -98,8 +89,8 @@ button:hover {
     border: none; /* Remove default border */
     border-radius: 10px; /* Match container styling */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-    width: 500px;
-    height: 400px;
+    width: 400px;
+    height: 350px;
 
     
 }

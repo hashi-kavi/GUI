@@ -11,6 +11,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Footer from './components/Footer'; // Import Footer
 import ProtectedRoute from './components/ProtectedRoute'; // Import ProtectedRoute
 import About from './pages/About';
+import PomodoroTimer from './pages/PomodoroTimer'; 
 
 const App = () => {
   return (
@@ -33,6 +34,7 @@ const App = () => {
                 </ProtectedRoute>
               }
             />
+ <Route path="/pomodorotimer" element={<PomodoroTimer />} /> 
             <Route
               path="/calendar"
               element={

@@ -1,14 +1,8 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../styles/LandingPage.css';
+import React from "react";
+import { Link } from "react-router-dom";
+import "../styles/LandingPage.css";
 
 const LandingPage = () => {
-  const navigate = useNavigate();
-
-  const handleGetStartedClick = () => {
-    navigate('/login'); // Navigate to the Login page
-  };
-
   return (
     <div className="landingpg">
       <div className="landing-page">
@@ -17,11 +11,11 @@ const LandingPage = () => {
           <p>Your Personal Productivity Assistant</p>
           <p>Manage tasks, track your progress, and boost your productivity!</p>
 
-          {/* Call-to-Action Button */}
+          {/* Call-to-Action Button using Link */}
           <div className="cta-container">
-            <button className="cta-button" onClick={handleGetStartedClick}>
-              Get Started
-            </button>
+            <Link to="/login">
+              <button className="cta-button">Get Started</button>
+            </Link>
           </div>
         </header>
 

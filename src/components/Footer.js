@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-middle">
         <div className="footer-column">
           <h3>Contact Us</h3>
-          <p>Phone: +94763294218</p>
+          <p>Phone: +94714747775</p>
         </div>
         <div className="footer-column">
           <h3>Quick Links</h3>

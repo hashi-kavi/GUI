@@ -10,7 +10,7 @@ const LoginPage = () => {
   const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();//prevent page from reloading
     try {
       const response = await axios.post('http://localhost:5000/login', { email, password });
       if (response.data.message === 'Login successful') {

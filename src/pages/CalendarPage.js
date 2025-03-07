@@ -23,7 +23,7 @@ const CalendarPage = () => {
     };
     fetchTasks();
   }, [userId]);
-
+//pass the tasks array to the CalendarIntegration component
   return (
     <div className="Calendar-page">
       <CalendarIntegration tasks={[...allTasks, ...completedTasks]} />
